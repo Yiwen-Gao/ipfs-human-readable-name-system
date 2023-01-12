@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "IPFS Human Readable Name System",
+  "description": "Base Level Extension",
+  "version": "1.0",
+  "content_scripts": [],
+  "background": {
+    "service_worker": "client.js"
+  },
+  "action": {},
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "declarativeNetRequest",
+    "https://*.google.com/*",
+    "http://localhost/*"
+  ],
+  "host_permissions": [
+    "https://*.google.com/*",
+    "http://localhost/*"
+  ]
+}
