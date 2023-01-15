@@ -30,6 +30,10 @@ const ipfs = require('./ipfs');
 // );
 
 async function handleOmnibox(input: string): Promise<void> {
+    if (!/[a-zA-Z]{3,}/.test(input)) {
+        return;
+    }
+
     const options = { active: true, lastFocusedWindow: true };
     const [tabs, cid] = await Promise.all([
         chrome.tabs.query(options),
