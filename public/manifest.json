@@ -13,10 +13,10 @@
     "webRequestBlocking",
     "declarativeNetRequest",
     "https://*.google.com/*",
-    "http://localhost/*"
+    "http://127.0.0.1:8545/*"
   ],
   "host_permissions": [
     "https://*.google.com/*",
-    "http://localhost/*"
+    "http://127.0.0.1:8545/*"
   ]
 }

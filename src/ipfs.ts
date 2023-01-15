@@ -1,10 +1,10 @@
-import Web3 from "web3";
-// import Eth from 'web3-eth';
-import { AbiItem } from 'web3-utils';
+const Eth = require('web3-eth');
 
-let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-// let eth = new Eth(Eth.givenProvider || 'ws://localhost:8545');
-const abi: AbiItem[] = [
+const INFURA_API_KEY = 'cb510badbd944b0983cc6090f64b305e';
+const INFURA_URL = `https://goerli.infura.io/v3/${INFURA_API_KEY}`;
+const LOCAL_URL = 'http://127.0.0.1:8545';
+const CONTRACT_ADDRESS = '0x476c2f9d0a7c7E77eC7D5Cb1eD15bf53e0aC8F1B';
+const abi = [
     {
         "inputs": [
             {
@@ -16,9 +16,9 @@ const abi: AbiItem[] = [
         "name": "getCID",
         "outputs": [
             {
-                "internalType": "uint256",
+                "internalType": "string",
                 "name": "",
-                "type": "uint256"
+                "type": "string"
             }
         ],
         "stateMutability": "view",
@@ -26,9 +26,16 @@ const abi: AbiItem[] = [
     },
 ];
 
-const contractAddress = '0x6B3E385A08576Bd1B2627BCC3dd1BF370b5aA482';
-const IPFSNameSystem = new web3.eth.Contract(abi, contractAddress);
+const provider = new Eth.providers.HttpProvider(LOCAL_URL);
+const eth = new Eth(Eth.givenProvider || provider);
+const IPFSNameSystem = new eth.Contract(abi, CONTRACT_ADDRESS);
 
-export function getCIDForDomainName(name: string): Promise<string> {
-    return IPFSNameSystem.methods.getCID(name);
+exports.getCIDForDomainName = (name: string): Promise<string> => {
+    return IPFSNameSystem.methods.getCID(name)
+        .call({from: eth.defaultAccount})
+        .then((result: string) => result)
+        .catch((error: any) => {
+            console.log(`Is there a name system record on chain? Failed to get CID for "${name}":`, error);
+            return '';
+        });
 }
