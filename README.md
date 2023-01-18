@@ -1,16 +1,16 @@
 # IPFS Human-readable Name System
 
 ## Background
-This project creates a human-readable name system for content hashes, similar to ENS or other on-chain name systems for wallet addresses. 
-Right now, there are two common ways to do a name-to-hash mapping in IPFS:
+This project creates a human-readable name system for content hashes, similar to the functionality provided by EthDNS and the IPFS companion extension. 
+There are two other ways to save a name-to-hash mapping, but the UX isn't as good:
 
 - Browser bookmarks
-	- You can bookmark a gateway link and even use it in private browsing mode
+	- You can bookmark a gateway link, use it in private browsing mode, and there is no monetary cost
 	- But you have to save the link permanently, and there's no easy way for others to access the mapping since it's just on your browser
 
 - DNSLink
 	- This is already integrated with the Brave browser, IPFS companion extension, and IPFS daemon
-	- But you have to own a DNS record, and you can't purchase the domain with blockchain tokens
+	- But you have to purchase the domain with fiat currency, and DNS is centralized and controlled by only a few entities
 
 ## Setup
 - Deploy the Solidity contracts to an EVM-compatible chain
